@@ -1,15 +1,25 @@
-const searchButton = document.getElementById("search-btn");
+const form = document.getElementById("search-form");
+const input = document.getElementById("search-input");
+const resultDiv = document.getElementById("result");
 
-searchButton.addEventListener("click", function () {
+form.addEventListener("submit", function (event) {
+  event.preventDefault();
 
-  fetch("superheroes.php")
+  const query = input.value.trim();
+  const url = "superheroes.php?query=" + encodeURIComponent(query);
+
+  fetch(url)
     .then(function (response) {
+      if (!response.ok) {
+        throw new Error("Server returned " + response.status);
+      }
       return response.text();
     })
-    .then(function (data) {
-      alert(data);
+    .then(function (html) {
+      resultDiv.innerHTML = html;
     })
     .catch(function (error) {
-      console.error("Request failed:", error);
+      resultDiv.textContent = "Something went wrong. Please try again.";
+      console.error(error);
     });
 });
