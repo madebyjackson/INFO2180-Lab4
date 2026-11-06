@@ -1,0 +1,14 @@
+body {
+  font-family: Georgia, serif;
+  margin: 20px;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+#search-btn {
+  padding: 4px 12px;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
